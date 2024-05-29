@@ -1,5 +1,6 @@
 package com.example.curriculum.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -18,7 +19,7 @@ public class Education {
     private LocalDate endDate;
     @ManyToOne
     @JoinColumn(name = "personal_id")
-    @JsonIgnoreProperties("educationList")
+    @JsonBackReference
     private Personal personal;
 
 

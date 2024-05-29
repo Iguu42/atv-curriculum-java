@@ -1,5 +1,7 @@
 package com.example.curriculum.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,7 +14,9 @@ public class Skill {
 
     @ManyToOne
     @JoinColumn(name = "personal_id")
+    @JsonBackReference
     private Personal personal;
+
 
     public Long getId() {
         return id;

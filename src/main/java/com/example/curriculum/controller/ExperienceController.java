@@ -1,8 +1,10 @@
 package com.example.curriculum.controller;
 
 import com.example.curriculum.model.Experience;
+import com.example.curriculum.model.Personal;
 import com.example.curriculum.repository.ExperienceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +26,11 @@ public class ExperienceController {
     }
 
     @PostMapping
-    public Experience createExperience(@RequestBody Experience experience) {
-        return experienceRepository.save(experience);
+    public ResponseEntity<?> createExperience(@RequestBody Experience experience,  @RequestParam("personalId") int personalId) {
+        Personal personal = new Personal();
+        personal.setId(personalId);
+        experience.setPersonal(personal);
+        Experience saveExperience = experienceRepository.save(experience);
+        return ResponseEntity.ok(saveExperience);
     }
 }

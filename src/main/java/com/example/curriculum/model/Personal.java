@@ -1,6 +1,7 @@
 package com.example.curriculum.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -14,11 +15,16 @@ public class Personal {
     private String profession;
     private String email;
     private String phone;
-    @OneToMany(mappedBy = "personal", cascade = CascadeType.ALL)
-    private List<Education> educationList;
-
+    @OneToMany(mappedBy = "personal", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<Education> education;
+    @OneToMany(mappedBy = "personal", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<Experience> experience;
+    @OneToMany(mappedBy = "personal", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<Skill> skills;
     public Personal() {
-
     }
 
     @JsonCreator

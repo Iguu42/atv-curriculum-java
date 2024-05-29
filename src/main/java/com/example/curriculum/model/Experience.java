@@ -1,5 +1,7 @@
 package com.example.curriculum.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -17,6 +19,7 @@ public class Experience {
 
     @ManyToOne
     @JoinColumn(name = "personal_id")
+    @JsonBackReference
     private Personal personal;
 
     public Long getId() {

@@ -1,8 +1,10 @@
 package com.example.curriculum.controller;
 
+import com.example.curriculum.model.Personal;
 import com.example.curriculum.model.Skill;
 import com.example.curriculum.repository.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +26,11 @@ public class SkillController {
     }
 
     @PostMapping
-    public Skill createSkill(@RequestBody Skill skill) {
-        return skillRepository.save(skill);
+    public ResponseEntity<?> createSkill(@RequestBody Skill skill, @RequestParam("personalId") int personalId) {
+        Personal personal = new Personal();
+        personal.setId(personalId);
+        skill.setPersonal(personal);
+        Skill savedSkill = skillRepository.save(skill);
+        return ResponseEntity.ok(savedSkill);
     }
 }
